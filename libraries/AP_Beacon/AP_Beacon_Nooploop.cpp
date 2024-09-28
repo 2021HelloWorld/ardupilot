@@ -67,12 +67,7 @@ void AP_Beacon_Nooploop::update(void)
         if (b >= 0 ) {
             MsgType type = parse_byte((uint8_t)b);
             if (type == MsgType::NODE_FRAME2) {
-                if (_anchor_pos_avail) {
                     parse_node_frame2();
-                } else if (AP_HAL::millis() - _last_request_setting_ms > 2000) {
-                    _last_request_setting_ms = AP_HAL::millis();
-                    request_setting();
-                }
             } else if (type == MsgType::SETTING_FRAME0) {
                 parse_setting_frame0();
             } 
